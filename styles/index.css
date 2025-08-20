@@ -102,6 +102,9 @@
   --md-codeblock-border-width: 1px;
   --md-codeblock-background-color: hsl(var(--hsl-slate-50));
 
+  --md-inline-mark-background-color: hsl(var(--hsl-yellow-500) / 30%);
+  --md-inline-mark-underline-color: hsl(var(--hsl-yellow-500));
+
   --md-table-border-color: hsl(var(--hsl-slate-200));
   --md-table-border-width: 1px;
   --md-table-background-color: hsl(var(--hsl-slate-50));
