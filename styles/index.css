@@ -48,6 +48,7 @@
   --editor-gutter-border-right: 1px solid hsl(var(--hsl-slate-200));
   --editor-gutter-color: var(--bd-base06);
   --editor-gutter-background-color: transparent;
+  --editor-gutter-background-solid-color: hsl(var(--hsl-white));
   --editor-active-line-gutter-background-color: var(--bd-bg-highlight);
   --editor-panel-background-color: hsl(var(--hsl-slate-50));
   --editor-panel-color: var(--bd-base03);
