@@ -45,6 +45,7 @@
   --editor-focused-selection-background: var(--bd-selection);
   --editor-active-line-background-color: var(--bd-bg-highlight);
   --editor-special-char-color: var(--bd-base0B);
+  --editor-spelling-error-color: var(--negative-color);
   --editor-gutter-border-right: 1px solid hsl(var(--hsl-slate-200));
   --editor-gutter-color: var(--bd-base06);
   --editor-gutter-background-color: transparent;
