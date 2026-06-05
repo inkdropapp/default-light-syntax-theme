@@ -67,6 +67,9 @@
   );
   --editor-tooltip-autocomplete-section-border-color: var(--bd-base06);
   --editor-tooltip-autocomplete-item-selected-color: var(--bd-base01);
+  --editor-inline-tooltip-color: hsl(var(--hsl-slate-600));
+  --editor-inline-tooltip-background-color: hsl(var(--hsl-white));
+  --editor-inline-tooltip-outline: 1px solid hsl(var(--hsl-blue-300) / 30%);
   --editor-completion-label: var(--bd-base03);
   --editor-completion-matched-text-color: var(--bd-base01);
   --editor-completion-matched-text-decoration: none;
@@ -87,6 +90,7 @@
   --editor-search-match-selected-background-color: hsl(var(--hsl-orange-300));
   --editor-search-match-selected-outline: 1px solid var(--bd-base09);
   --editor-placeholder-color: var(--bd-base06);
+  --editor-nes-ghost-color: var(--bd-base06);
   --editor-highlight-space-color: hsl(var(--hsl-slate-100));
   --editor-highlight-tab-background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="20"><path stroke="%23888" stroke-width="1" fill="none" d="M1 10H196L190 5M190 15L196 10M197 4L197 16"/></svg>');
   --editor-highlight-tab-filter: 'none';
