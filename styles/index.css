@@ -1,4 +1,7 @@
 :root {
+  /**
+   * Primitive design tokens are defined in https://github.com/inkdropapp/css/blob/main/tokens.css
+   */
   --hsl-base00: var(--hsl-white);
   --hsl-base01: var(--hsl-slate-800);
   --hsl-base02: var(--hsl-blue-600);
@@ -38,6 +41,9 @@
   --bd-selection: hsl(var(--hsl-blue-400) / 40%);
   --bd-cursor: hsl(var(--hsl-base0D));
 
+  /**
+   * Editor UI colors
+   */
   --editor-foreground-color: var(--bd-base01);
   --editor-background-color: var(--bd-base00);
   --editor-caret-color: var(--bd-cursor);
@@ -94,7 +100,7 @@
   --editor-nes-ghost-color: var(--bd-base06);
   --editor-highlight-space-color: hsl(var(--hsl-slate-100));
   --editor-highlight-tab-background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="20"><path stroke="%23888" stroke-width="1" fill="none" d="M1 10H196L190 5M190 15L196 10M197 4L197 16"/></svg>');
-  --editor-highlight-tab-filter: 'none';
+  --editor-highlight-tab-filter: "none";
   --editor-highlight-tab-opacity: 0.3;
   --editor-trailing-space-background-color: hsl(var(--hsl-red-200));
   --editor-fold-placeholder-border-radius: 0.2em;
@@ -104,10 +110,19 @@
   --editor-image-widget-backdrop-background-color: hsl(var(--hsl-slate-100));
   --editor-image-widget-backdrop-border: 1px solid hsl(var(--hsl-slate-200));
 
+  /**
+   * Markdown-specific colors
+   */
+  --md-inline-code-padding: 1px;
+  --md-inline-code-border-color: hsl(var(--hsl-slate-200));
+  --md-inline-code-border-width: 1px;
+  --md-inline-code-background-color: hsl(var(--hsl-slate-50));
+  --md-codeblock-color: var(--editor-foreground-color);
   --md-codeblock-border-color: hsl(var(--hsl-slate-200));
   --md-codeblock-border-width: 1px;
   --md-codeblock-background-color: hsl(var(--hsl-slate-50));
 
+  --md-inline-mark-text-color: var(--editor-foreground-color);
   --md-inline-mark-background-color: hsl(var(--hsl-yellow-500) / 30%);
   --md-inline-mark-underline-color: hsl(var(--hsl-yellow-500));
 
@@ -119,7 +134,7 @@
 }
 
 /*============================================================================
-  Syntax colours (classes produced by tokenHighlighter.ts)
+  Syntax colors (classes produced by tokenHighlighter.ts)
   ===========================================================================*/
 .cm-editor,
 .mde-preview .codeblock {
@@ -154,7 +169,7 @@
     color: var(--bd-base09);
   }
 
-  /* colour literals, constants, std-lib names --------------------------*/
+  /* color literals, constants, std-lib names --------------------------*/
   .tok-color,
   .tok-name.tok-constant,
   .tok-name.tok-standard {
