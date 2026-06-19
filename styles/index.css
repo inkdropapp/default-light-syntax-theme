@@ -1,216 +1,367 @@
-.editor {
-  /* Polar Night */
-  --base00: hsl(220 16% 22%);
-  --base01: hsl(222 16% 28%);
-  --base02: hsl(220 17% 32%);
-  --base03: hsl(220 16% 40%);
+:root {
+  /**
+   * Primitive design tokens are defined in https://github.com/inkdropapp/css/blob/main/tokens.css
+   */
+  --hsl-base00: var(--hsl-white);
+  --hsl-base01: var(--hsl-slate-800);
+  --hsl-base02: var(--hsl-blue-600);
+  --hsl-base03: var(--hsl-slate-600);
+  --hsl-base04: var(--hsl-slate-400);
+  --hsl-base05: var(--hsl-slate-300);
+  --hsl-base06: var(--hsl-slate-500);
+  --hsl-base07: var(--hsl-slate-900);
+  --hsl-base08: var(--hsl-red-600);
+  --hsl-base09: var(--hsl-orange-600);
+  --hsl-base0A: var(--hsl-amber-600);
+  --hsl-base0B: var(--hsl-teal-600);
+  --hsl-base0C: var(--hsl-green-600);
+  --hsl-base0D: var(--hsl-blue-500);
+  --hsl-base0E: var(--hsl-purple-600);
+  --hsl-base0F: var(--hsl-indigo-500);
 
-  /* Snow Storm */
-  --base04: hsl(219 28% 88%);
-  --base05: hsl(218 27% 92%);
-  --base06: hsl(218 27% 94%);
+  --bd-base00: hsl(var(--hsl-base00));
+  --bd-base01: hsl(var(--hsl-base01));
+  --bd-base02: hsl(var(--hsl-base02));
+  --bd-base03: hsl(var(--hsl-base03));
+  --bd-base04: hsl(var(--hsl-base04));
+  --bd-base05: hsl(var(--hsl-base05));
+  --bd-base06: hsl(var(--hsl-base06));
+  --bd-base07: hsl(var(--hsl-base07));
+  --bd-base08: hsl(var(--hsl-base08));
+  --bd-base09: hsl(var(--hsl-base09));
+  --bd-base0A: hsl(var(--hsl-base0A));
+  --bd-base0B: hsl(var(--hsl-base0B));
+  --bd-base0C: hsl(var(--hsl-base0C));
+  --bd-base0D: hsl(var(--hsl-base0D));
+  --bd-base0E: hsl(var(--hsl-base0E));
+  --bd-base0F: hsl(var(--hsl-base0F));
 
-  /* Frost */
-  --base07: hsl(179 25% 65%);
-  --base08: hsl(193 43% 67%);
-  --base09: hsl(210 44% 63%);
-  --base0A: hsl(213 42% 52%);
+  --bd-bg: var(--bd-base00);
+  --bd-bg-highlight: hsl(var(--hsl-blue-300) / 10%);
+  --bd-selection: hsl(var(--hsl-blue-400) / 40%);
+  --bd-cursor: hsl(var(--hsl-base0D));
 
-  /* Aurora */
-  --base0B: hsl(354 62% 56%);
-  --base0C: hsl(14 61% 63%);
-  --base0D: hsl(40 81% 73%);
-  --base0E: hsl(92 38% 55%);
-  --base0F: hsl(311 40% 63%);
+  /**
+   * Editor UI colors
+   */
+  --editor-foreground-color: var(--bd-base01);
+  --editor-background-color: var(--bd-base00);
+  --editor-caret-color: var(--bd-cursor);
+  --editor-selection-background: hsl(var(--hsl-slate-500) / 40%);
+  --editor-focused-selection-background: var(--bd-selection);
+  --editor-active-line-background-color: var(--bd-bg-highlight);
+  --editor-special-char-color: var(--bd-base0B);
+  --editor-spelling-error-color: var(--negative-color);
+  --editor-gutter-border-right: 1px solid hsl(var(--hsl-slate-200));
+  --editor-gutter-color: var(--bd-base06);
+  --editor-gutter-background-color: transparent;
+  --editor-gutter-background-solid-color: hsl(var(--hsl-white));
+  --editor-active-line-gutter-background-color: var(--bd-bg-highlight);
+  --editor-panel-background-color: hsl(var(--hsl-slate-50));
+  --editor-panel-color: var(--bd-base03);
+  --editor-panel-border-color: var(--border-color);
+  --editor-tooltip-border-style: solid;
+  --editor-tooltip-border-width: 1px;
+  --editor-tooltip-border-color: hsl(var(--hsl-slate-200));
+  --editor-tooltip-border-radius: 0.8em;
+  --editor-tooltip-background-color: hsl(var(--hsl-white));
+  --editor-tooltip-box-shadow: 0px 2px 4px 0 hsl(var(--hsl-slate-200));
+  --editor-tooltip-autocomplete-padding: 0.2em;
+  --editor-tooltip-autocomplete-item-border-radius: 0.2em;
+  --editor-tooltip-autocomplete-item-padding: 0 0.8em;
+  --editor-tooltip-autocomplete-item-selected-background-color: hsl(
+    var(--hsl-blue-100)
+  );
+  --editor-tooltip-autocomplete-section-border-color: var(--bd-base06);
+  --editor-tooltip-autocomplete-item-selected-color: var(--bd-base01);
+  --editor-inline-tooltip-color: hsl(var(--hsl-slate-600));
+  --editor-inline-tooltip-background-color: hsl(var(--hsl-white));
+  --editor-inline-tooltip-outline: 1px solid hsl(var(--hsl-blue-300) / 30%);
+  --editor-completion-label: var(--bd-base03);
+  --editor-completion-matched-text-color: var(--bd-base01);
+  --editor-completion-matched-text-decoration: none;
+  --editor-completion-matched-text-font-style: normal;
+  --editor-completion-matched-text-font-weight: bold;
+  --editor-completion-detail-color: var(--bd-base0C);
+  --editor-completion-detail-text-decoration: none;
+  --editor-completion-detail-font-style: normal;
+  --editor-completion-detail-font-weight: normal;
+  --editor-matching-bracket-outline: 1px solid hsl(var(--hsl-blue-500));
+  --editor-matching-bracket-background-color: hsl(var(--hsl-blue-100));
+  --editor-nonmatching-bracket-outline: 1px solid var(--bd-base03);
+  --editor-nonmatching-bracket-background-color: transparent;
+  --editor-selection-match-background-color: hsl(var(--hsl-yellow-200));
+  --editor-selection-match-outline: none;
+  --editor-search-match-background-color: hsl(var(--hsl-yellow-300));
+  --editor-search-match-outline: none;
+  --editor-search-match-selected-background-color: hsl(var(--hsl-orange-300));
+  --editor-search-match-selected-outline: 1px solid var(--bd-base09);
+  --editor-placeholder-color: var(--bd-base06);
+  --editor-nes-ghost-color: var(--bd-base06);
+  --editor-highlight-space-color: hsl(var(--hsl-slate-100));
+  --editor-highlight-tab-background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="20"><path stroke="%23888" stroke-width="1" fill="none" d="M1 10H196L190 5M190 15L196 10M197 4L197 16"/></svg>');
+  --editor-highlight-tab-filter: "none";
+  --editor-highlight-tab-opacity: 0.3;
+  --editor-trailing-space-background-color: hsl(var(--hsl-red-200));
+  --editor-fold-placeholder-border-radius: 0.2em;
+  --editor-fold-placeholder-color: var(--bd-base00);
+  --editor-fold-placeholder-border: 1px solid var(--bd-base04);
+  --editor-fold-placeholder-background-color: var(--bd-base04);
+  --editor-image-widget-backdrop-background-color: hsl(var(--hsl-slate-100));
+  --editor-image-widget-backdrop-border: 1px solid hsl(var(--hsl-slate-200));
 
-  .CodeMirror {
-    /* Background color of main window */
-    background-color: transparent;
-    color: var(--base02);
-    --fat-cursor-color: var(--base08);
+  /**
+   * Markdown-specific colors
+   */
+  --md-inline-code-padding: 1px;
+  --md-inline-code-border-color: hsl(var(--hsl-slate-200));
+  --md-inline-code-border-width: 1px;
+  --md-inline-code-background-color: hsl(var(--hsl-slate-50));
+  --md-codeblock-color: var(--editor-foreground-color);
+  --md-codeblock-border-color: hsl(var(--hsl-slate-200));
+  --md-codeblock-border-width: 1px;
+  --md-codeblock-background-color: hsl(var(--hsl-slate-50));
 
-    .CodeMirror-scroll {
-      /* Color of otherwise un-styled text */
-      color: var(--base02);
-    }
-    .CodeMirror-gutters {
-      /* Gutter to the left */
-      background-color: transparent;
-      border-right: 1px solid hsl(0deg 100% 0% / 10%);
-    }
-    .CodeMirror-linenumber {
-      /* Line numbers in the gutter */
-      color: var(--base03);
-      opacity: 0.6;
-    }
-    .CodeMirror-selected {
-      /* Highlighed text */
-      background-color: var(--base05);
-    }
-    .CodeMirror-focused .CodeMirror-selected {
-      /* Highlighed text */
-      background-color: var(--base04);
-    }
-    .CodeMirror-cursor {
-      /* The cursor */
-      border-left: 1px solid var(--base00);
-    }
-    .CodeMirror-matchingbracket,
-    .CodeMirror-matchingtag {
-      /* When you click a tag/bracket and the matching one is highlighted */
-      background: var(--base03) !important;
-      border-bottom: 1px solid var(--base08) !important;
-    }
-    .CodeMirror-foldgutter-open:after {
-      /* Those little arrows in the gutter */
-      color: var(--base03);
-    }
-    .CodeMirror-foldgutter-folded:after {
-      /* The arrows after you collapse code */
-      color: var(--base03);
-    }
-    .CodeMirror.over-gutter,
-    .CodeMirror-activeline {
-      .CodeMirror-foldgutter-open:after {
-        /* Arrows when hovering on the gutter */
-        color: var(--base03);
-      }
-    }
-    .CodeMirror-foldmarker {
-      /* The [...] marking collapsed code */
-      border-color: var(--base03);
-      background-color: var(--base03);
-      color: var(--base02);
-    }
-    .CodeMirror .CodeMirror-linewidget img.inline-widget {
-      background: rgba(0, 0, 0, 0.05);
-    }
-    .CodeMirror-searching {
-      /* Ctrl + F results */
-      background-color: var(--base0D);
-      /* Selected result */
-      &.searching-current-match {
-        background-color: var(--base0C);
-      }
+  --md-inline-mark-text-color: var(--editor-foreground-color);
+  --md-inline-mark-background-color: hsl(var(--hsl-yellow-500) / 30%);
+  --md-inline-mark-underline-color: hsl(var(--hsl-yellow-500));
+
+  --md-table-border-color: hsl(var(--hsl-slate-200));
+  --md-table-border-width: 1px;
+  --md-table-background-color: hsl(var(--hsl-slate-50));
+
+  --md-blockquote-border-color: var(--bd-base06);
+}
+
+/*============================================================================
+  Syntax colors (classes produced by tokenHighlighter.ts)
+  ===========================================================================*/
+.cm-editor,
+.mde-preview .codeblock {
+  /* keywords -----------------------------------------------------------*/
+  .tok-keyword,
+  .tok-operator-keyword,
+  .tok-module-keyword {
+    color: var(--bd-base0D);
+  }
+
+  /* basic names, deletes, chars, prop- & macro-names -------------------*/
+  .tok-name,
+  .tok-deleted,
+  .tok-character,
+  .tok-property-name,
+  .tok-macro-name {
+    color: var(--bd-base0C);
+  }
+
+  /* variable names -----------------------------------------------------*/
+  .tok-variable-name {
+    color: var(--bd-base09);
+  }
+
+  /* function identifiers & calls --------------------------------------*/
+  .tok-variable-name.tok-function {
+    color: var(--bd-base0D);
+  }
+
+  /* labels -------------------------------------------------------------*/
+  .tok-label-name {
+    color: var(--bd-base09);
+  }
+
+  /* color literals, constants, std-lib names --------------------------*/
+  .tok-color,
+  .tok-name.tok-constant,
+  .tok-name.tok-standard {
+    color: var(--bd-base09);
+  }
+
+  /* definitions & separators ------------------------------------------*/
+  .tok-name.tok-definition,
+  .tok-definition-keyword,
+  .tok-control-keyword,
+  .tok-separator {
+    color: var(--bd-base0E);
+  }
+
+  /* braces, square/angle brackets -------------------------------------*/
+  .tok-brace,
+  .tok-square-bracket,
+  .tok-angle-bracket {
+    color: var(--bd-base0E);
+  }
+
+  /* annotations (highlighted in warning orange) ------------------------*/
+  .tok-annotation {
+    color: var(--bd-base09);
+  }
+
+  /* numbers, changed, modifier, self, namespace ------------------------*/
+  .tok-number,
+  .tok-changed,
+  .tok-modifier,
+  .tok-self,
+  .tok-namespace {
+    color: var(--bd-base09);
+  }
+
+  /* type & class names -------------------------------------------------*/
+  .tok-type-name,
+  .tok-class-name {
+    color: var(--bd-base0D);
+  }
+
+  /* operators ----------------------------------------------------------*/
+  .tok-operator,
+  .tok-deref-operator,
+  .tok-arithmetic-operator,
+  .tok-logic-operator,
+  .tok-bitwise-operator,
+  .tok-compare-operator,
+  .tok-update-operator,
+  .tok-definition-operator,
+  .tok-control-operator {
+    color: var(--bd-base0E);
+  }
+
+  /* HTML/XML tag names -------------------------------------------------*/
+  .tok-tag-name {
+    color: var(--bd-base0B);
+  }
+
+  /* attribute names ----------------------------------------------------*/
+  .tok-attribute-name {
+    color: var(--bd-base0D);
+  }
+
+  /* regular expressions -----------------------------------------------*/
+  .tok-regexp {
+    color: var(--bd-base09);
+  }
+
+  /* quotes / block-quotes ---------------------------------------------*/
+  @layer quote {
+    .tok-quote:not(.md-alert) {
+      color: var(--bd-base06);
+      font-style: italic;
     }
   }
 
-  /* All 'dem swatches */
-
-  .CodeMirror {
-    .cm-quote {
-      color: var(--base0F);
-      font-style: italic;
-    }
-    .cm-atom,
-    .cm-formatting-list.cm-variable-3 {
-      color: var(--base0C);
-    }
-
-    .cm-keyword,
-    .cm-formatting-list.cm-variable-2 {
-      color: var(--base0A);
-    }
-
-    .cm-url,
-    .cm-string,
-    .cm-string-2,
-    .cm-hr {
-      color: var(--base09);
-    }
-    .cm-number,
-    .cm-attribute,
-    .cm-plus {
-      color: var(--base0A);
-    }
-    .cm-def,
-    .cm-property {
-      color: var(--base0C);
-    }
-    .cm-variable {
-      color: var(--base0A);
-    }
-    .cm-operator,
-    .cm-meta,
-    .cm-bracket {
-      color: var(--base0E);
-    }
-    .cm-comment {
-      color: var(--base03);
-      font-style: italic;
-    }
-    .cm-error,
-    .cm-minus {
-      color: var(--base0B);
-    }
-    .cm-formatting-header {
-      opacity: 0.3;
-    }
-    .cm-header {
-      color: var(--base0A);
-    }
-    .cm-link {
-      color: var(--base0E);
-      text-underline-position: under;
-    }
-    .cm-rangeinfo {
-      color: var(--base0C);
-    }
-    .cm-qualifier,
-    .cm-builtin,
-    .cm-tag {
-      color: var(--base08);
-    }
-    .cm-whitespace::before {
-      color: var(--base04);
-      opacity: 0.4;
-    }
-    .cm-formatting-quote,
-    .cm-formatting-strong,
-    .cm-formatting-em {
-      opacity: 0.6;
-    }
-    .cm-strong {
-      color: var(--base0B);
-    }
-    .cm-em {
-      color: var(--base0C);
-    }
-
-    /* carriage return */
-    .CodeMirror-code > div > pre > span::after,
-    .CodeMirror-line > span::after {
-      color: var(--base00);
-      opacity: 0.4;
-    }
-
-    .cm-inline-code {
-      background: rgba(0, 0, 0, 0.02);
-      color: var(--base03);
-    }
-
-    .gfm-codeblock-bg.CodeMirror-linebackground {
-      background: rgba(0, 0, 0, 0.01);
-    }
-
-    .cm-table-sep,
-    .table-row.table-row-1 {
-      color: var(--base0E);
-    }
-
-    .cm-quote.cm-link-barelink {
-      font-style: normal;
-      color: var(--base0B);
-    }
+  /* strings ------------------------------------------------------------*/
+  .tok-string {
+    color: var(--bd-base0C);
   }
 
-  /* Active Line Highlight support */
-  .CodeMirror-activeline-background,
-  .CodeMirror-activeline-gutter {
-    background-color: color-mix(
-      in srgb,
-      var(--base06),
-      transparent 70%
-    ) !important;
+  /* links --------------------------------------------------------------*/
+  .tok-link {
+    color: var(--bd-base0F);
+    text-decoration: underline;
+    text-underline-position: under;
+  }
+
+  /* urls, escapes, special strings ------------------------------------*/
+  .tok-url,
+  .tok-link.tok-url,
+  .tok-escape,
+  .tok-string.tok-special {
+    color: var(--bd-base0B);
+  }
+
+  /* meta / pre-processor ----------------------------------------------*/
+  .tok-meta {
+    color: var(--bd-base08);
+  }
+
+  /* comments -----------------------------------------------------------*/
+  .tok-comment,
+  .tok-line-comment,
+  .tok-block-comment,
+  .tok-doc-comment {
+    color: var(--bd-base06);
+    font-style: italic;
+  }
+
+  /* monospace (inline code) -------------------------------------------*/
+  .tok-monospace {
+    color: var(--bd-base01);
+  }
+
+  /* emphasis variants --------------------------------------------------*/
+  .tok-strong {
+    color: var(--bd-base09);
+    font-weight: bold;
+  }
+  .tok-emphasis {
+    color: var(--bd-base09);
+    font-style: italic;
+  }
+  .tok-strikethrough {
+    text-decoration: line-through;
+  }
+
+  /* headings -----------------------------------------------------------*/
+  .tok-heading,
+  .tok-heading-1,
+  .tok-heading-2,
+  .tok-heading-3,
+  .tok-heading-4,
+  .tok-heading-5,
+  .tok-heading-6 {
+    color: var(--bd-base0D);
+    font-weight: bold;
+  }
+
+  /* atoms, booleans, special vars -------------------------------------*/
+  .tok-atom,
+  .tok-bool,
+  .tok-variable-name.tok-special {
+    color: var(--bd-base0B);
+  }
+
+  /* processing instructions & inserted text ---------------------------*/
+  .tok-processing-instruction,
+  .tok-inserted {
+    color: var(--bd-base0B);
+  }
+
+  /* content separator --------------------------------------------------*/
+  .tok-content-separator {
+    color: var(--bd-base0D);
+  }
+
+  /* invalid / unsyntactic tokens --------------------------------------*/
+  .tok-invalid {
+    color: var(--bd-base08);
+    border-bottom: 1px dotted var(--bd-base08);
+  }
+
+  .md-header-mark {
+    opacity: 0.3;
+  }
+  .md-hard-break {
+    /* add styles if desired */
+  }
+  .md-quote-mark.tok-quote {
+    color: var(--bd-base06);
+  }
+  .md-list-mark {
+    color: var(--bd-base0F);
+  }
+  .md-link-mark {
+    /* … */
+  }
+  .md-emphasis-mark {
+    opacity: 0.6;
+  }
+  .md-code-mark {
+    /* … */
+  }
+  .md-table-delimiter {
+    /* … */
+  }
+  .md-strikethrough-mark {
+    /* … */
+  }
+  .md-task-marker {
   }
 }

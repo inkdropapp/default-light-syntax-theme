@@ -1,15 +1,13 @@
 {
-  "version": "1.0.0",
+  "version": "2.0.0",
   "name": "default-light-syntax",
   "description": "Default light syntax theme",
   "theme": "syntax",
-  "scripts": {
-    "build": "lessc styles/less/default.less ./styles/index.css"
-  },
+  "scripts": {},
   "styleSheets": [
     "index.css"
   ],
   "engines": {
-    "inkdrop": "^5.x"
+    "inkdrop": "^6.x"
   }
 }
