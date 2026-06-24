@@ -1,15 +1,14 @@
 {
-  "version": "2.0.0",
+  "version": "2.1.0",
   "name": "default-light-syntax",
   "description": "Default light syntax theme",
   "theme": "syntax",
-  "scripts": {},
-  "styleSheets": [
-    "index.css"
-  ],
   "scripts": {
     "prepublishOnly": "./node_modules/.bin/generate-palette"
   },
+  "styleSheets": [
+    "index.css"
+  ],
   "devDependencies": {
     "@inkdropapp/theme-dev-helpers": "^0.5.0"
   },
