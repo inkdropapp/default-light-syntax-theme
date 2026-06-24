@@ -189,5 +189,6 @@
   "--md-table-border-width": "1px",
   "--md-table-background-color": "hsl(214deg 32% 91% / 10%)",
   "--md-blockquote-border-color": "hsl(215deg 16% 47%)",
-  "--md-list-mark-color": "hsl(239deg 84% 67%)"
+  "--md-list-mark-color": "hsl(239deg 84% 67%)",
+  "--md-task-marker-font-weight": "bold"
 }
