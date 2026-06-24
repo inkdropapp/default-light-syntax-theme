@@ -1,12 +1,14 @@
 # Default light syntax theme for Inkdrop Markdown Editor
 
 The built-in default **light** syntax theme for [Inkdrop](https://www.inkdrop.app/).
-It also doubles as a **reference implementation** for anyone who wants to build their
-own syntax theme for Inkdrop (which runs on [CodeMirror 6](https://codemirror.net/)),
-or migrate a theme written for older versions.
+Its colours are derived from the **Tailwind Ice** palette (its dark counterpart,
+`default-dark-syntax`, uses **Tailwind Moon**). It also doubles as a **reference
+implementation** for anyone who wants to build their own syntax theme for Inkdrop (which
+runs on [CodeMirror 6](https://codemirror.net/)), or migrate a theme written for older
+versions.
 
-If you just want to read the code, the whole theme is a single stylesheet:
-[`styles/index.css`](./styles/index.css).
+If you just want to read the code, the whole theme is a single stylesheet —
+[`styles/index.css`](./styles/index.css) — and it contains **only CSS variables**.
 
 ---
 
@@ -43,101 +45,128 @@ Read the [theme development guide](https://developers.inkdrop.app/guides/create-
 
 ## Anatomy of `styles/index.css`
 
-The stylesheet is organised as a stack of layers, each referring only to the one above
-it. Re-skinning the theme is mostly a matter of editing the top layers and leaving the
-bottom ones alone.
+A syntax theme is **just a set of CSS variables**. The entire file is one `:root { … }`
+block — it has no selectors. The rules that actually paint the highlighting (`.tok-*`,
+`.md-*`) ship in the shared **`@inkdropapp/css`** package and consume your variables, so
+re-skinning the theme means changing variable _values_, not writing CSS rules.
 
 ```
-primitive tokens  (@inkdropapp/css)   →   --hsl-slate-800, --hsl-blue-500, …
+primitive tokens   (@inkdropapp/css)                   →  --color-blue-600, --hsl-blue-500, …
         │
-16-slot palette   (--hsl-baseNN)      →   one primitive per slot
+semantic variables (--editor-*, --syntax-*, --md-*)    →  this theme (:root only)
         │
-resolved colours  (--bd-baseNN)       →   hsl(var(--hsl-baseNN))
-        │
-semantic vars     (--editor-*, --md-*)→   editor chrome & markdown decorations
-        │
-syntax classes    (.tok-*, .md-*)     →   the actual highlighting rules
+highlighting rules (.tok-*, .md-*, in @inkdropapp/css) →  map token classes onto your vars
 ```
 
 ### Primitive color tokens
 
 The lowest layer is **not** defined here. The primitive palette — a Tailwind-style ramp
-of `--hsl-<family>-<scale>` triplets (`--hsl-slate-50` … `--hsl-slate-950`, plus
-`--hsl-white` / `--hsl-black`) — lives in the shared **`@inkdropapp/css`** package and is
-loaded by the app before your theme:
+in the shared **`@inkdropapp/css`** package, loaded by the app before your theme — comes
+in two forms:
+
+- **`--color-<family>-<scale>`** — finished, opaque colours (e.g. `--color-blue-600`).
+- **`--hsl-<family>-<scale>`** — the underlying **HSL triplets** (e.g. `217deg 91% 60%`),
+  for when you need an alpha channel.
 
 > **Primitive color tokens are defined in
 > <https://github.com/inkdropapp/css/blob/main/tokens.css>**
 
 Families available: `slate`, `gray`, `zinc`, `neutral`, `stone`, `red`, `orange`,
 `amber`, `yellow`, `lime`, `green`, `emerald`, `teal`, `cyan`, `sky`, `blue`, `indigo`,
-`violet`, `purple`, `fuchsia`, `pink`, `rose` — each in scales `50, 100, … 900, 950`.
-
-The values are **HSL triplets** (e.g. `220deg 16% 22%`), not finished colours, so you
-wrap them in `hsl()` and can add an alpha channel:
+`violet`, `purple`, `fuchsia`, `pink`, `rose` — each in scales `50, 100, … 900, 950`,
+plus `--color-white` / `--color-black`.
 
 ```css
-color: hsl(var(--hsl-blue-500)); /* opaque   */
-background: hsl(var(--hsl-blue-400) / 40%); /* 40% alpha */
+color: var(--color-blue-600); /* opaque finished colour     */
+background: hsl(var(--hsl-blue-400) / 40%); /* HSL triplet with 40% alpha */
 ```
 
 ### Semantic variables
 
-The palette then feeds two families of semantic variables, also in `:root`:
+Everything in this theme is one of three variable families, all in `:root`:
 
 - **`--editor-*`** — editor chrome: foreground/background, caret, selection, gutter,
   active line, tooltips & autocomplete, matching brackets, search matches, whitespace
-  rendering, fold placeholders, etc. For example:
+  rendering, fold placeholders, etc.
 
   ```css
-  --editor-foreground-color: var(--bd-base01);
-  --editor-background-color: var(--bd-base00);
-  --editor-caret-color: var(--bd-cursor);
-  --editor-selection-background: hsl(var(--hsl-slate-500) / 40%);
+  --editor-foreground-color: var(--color-gray-800);
+  --editor-background-color: var(--color-white);
+  --editor-caret-color: var(--color-violet-600);
+  --editor-selection-background: hsl(var(--hsl-violet-600) / 13%);
   ```
 
-- **`--md-*`** — Markdown decorations: code blocks, tables, blockquotes, inline marks:
+- **`--syntax-*`** — one variable per highlight token; this is the token-colour contract
+  (see [below](#syntax-tokens---syntax-)).
+
+  ```css
+  --syntax-keyword-color: var(--color-violet-600);
+  --syntax-string-color: var(--color-green-600);
+  --syntax-comment-color: var(--color-slate-400);
+  --syntax-comment-font-style: italic;
+  ```
+
+- **`--md-*`** — Markdown decorations: code blocks, inline code, tables, blockquotes,
+  inline marks, list markers.
 
   ```css
   --md-codeblock-background-color: hsl(var(--hsl-slate-50));
   --md-table-border-color: hsl(var(--hsl-slate-200));
-  --md-blockquote-border-color: var(--bd-base06);
+  --md-blockquote-border-color: var(--color-slate-500);
   ```
 
-These variable names are the theming contract Inkdrop consumes — keep the names, change
-the values.
+These variable names are the theming contract Inkdrop consumes — **keep the names, change
+the values.**
 
-### Syntax classes
+### Syntax tokens (`--syntax-*`)
 
-Finally, the actual highlighting. Inkdrop's highlighter emits `.tok-*` classes (one per
+Inkdrop's highlighter emits `.tok-*` classes (one per
 [Lezer](https://lezer.codemirror.net/) highlight tag) inside `.cm-editor` and inside
-rendered preview code blocks (`.mde-preview .codeblock`):
+rendered preview code blocks (`.mde-preview .codeblock`). The rules that paint them ship
+in **`@inkdropapp/css`** and simply read your variables — you don't write them:
 
 ```css
+/* lives in @inkdropapp/css, not in your theme */
 .cm-editor,
 .mde-preview .codeblock {
   .tok-keyword {
-    color: var(--bd-base0D);
+    color: var(--syntax-keyword-color);
   }
   .tok-string {
-    color: var(--bd-base0C);
+    color: var(--syntax-string-color);
   }
   .tok-comment {
-    color: var(--bd-base06);
-    font-style: italic;
+    color: var(--syntax-comment-color);
+    font-style: var(--syntax-comment-font-style, italic);
   }
-  /* …one rule per token kind… */
 }
 ```
 
-Alongside the `.tok-*` rules are **`.md-*` mark classes** for the Markdown source markers
-themselves — `.md-header-mark`, `.md-list-mark`, `.md-emphasis-mark`, `.md-code-mark`,
-`.md-task-marker`, etc. — which let you dim or restyle the literal `#`, `-`, `*` and
-`` ` `` characters. Leave a rule empty (`{}`) to inherit the default; the file keeps a
-few empty placeholders as documentation of what's stylable.
+So your job is only to set the `--syntax-*` values. A few conventions:
 
-> This file uses **native CSS nesting** (no preprocessor). Inkdrop 6 ships modern CSS, so
-> nesting, `@layer`, and `hsl(... / alpha)` all work without a build step.
+- There is **one `--syntax-<token>-color` per token**, plus `-font-style` /
+  `-font-weight` / `-text-decoration` where relevant (`--syntax-comment-font-style`,
+  `--syntax-heading-font-weight`, `--syntax-link-text-decoration`, …) and
+  `--syntax-invalid-border-bottom` for the error squiggle.
+- **Modifier variants default to their base token**, so you only override what differs —
+  e.g. `--syntax-name-function-color: var(--syntax-name-color)`.
+- **Tokens you don't colour fall back to the editor foreground** — e.g.
+  `--syntax-punctuation-color: var(--editor-foreground-color)`.
+
+The full set of tokens is the
+[`tokenHighlighter`](https://github.com/inkdropapp/cm6-themes) catalog; this theme defines
+a value for every one.
+
+### Markdown source markers (`.md-*`)
+
+Alongside the token rules, `@inkdropapp/css` also styles the Markdown **source markers** —
+`.md-header-mark`, `.md-list-mark`, `.md-emphasis-mark`, `.md-code-mark`,
+`.md-task-marker`, the inline-code box, etc. — from the `--md-*` variables. Set those
+variables to restyle the literal `#`, `-`, `*` and `` ` `` characters and the code-block
+chrome.
+
+> This theme uses no preprocessor and contains no selectors of its own. Inkdrop 6 ships
+> modern CSS, so `hsl(... / alpha)` and custom properties work without a build step.
 
 ---
 
@@ -147,7 +176,8 @@ Porting a theme from Inkdrop 5 (CodeMirror 5, usually authored in LESS) to Inkdr
 CodeMirror 6? See **[Plugin Migration Guide from v5 to v6 → Syntax themes](https://developer.inkdrop.app/appendix/plugin-migration-from-v5-to-v6#syntax-themes)**.
 
 It covers the `.CodeMirror-*` → `--editor-*` variable mapping and the `.cm-*` → `.tok-*`
-token-class mapping. The [anatomy](#anatomy-of-stylesindexcss) above is what you're
+token-class mapping — which you now drive by setting `--syntax-*` variables rather than
+writing `.tok-*` rules. The [anatomy](#anatomy-of-stylesindexcss) above is what you're
 migrating _to_.
 
 ---
@@ -156,6 +186,8 @@ migrating _to_.
 
 - Primitive color tokens — <https://github.com/inkdropapp/css/blob/main/tokens.css>
 - This theme's source — [`styles/index.css`](./styles/index.css)
+- The shared highlighting rules (`.tok-*` / `.md-*`) and `--syntax-*` contract —
+  [`@inkdropapp/css`](https://github.com/inkdropapp/css)
 - CodeMirror 6 themes (the underlying npm packages) —
   [inkdropapp/cm6-themes](https://github.com/inkdropapp/cm6-themes)
 - Inkdrop documentation — <https://docs.inkdrop.app/>
