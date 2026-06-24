@@ -1,6 +1,6 @@
-# Default light syntax theme for Inkdrop Markdown Editor
+# Default syntax theme for Inkdrop Markdown Editor
 
-The built-in default **light** syntax theme for [Inkdrop](https://www.inkdrop.app/).
+The built-in default syntax theme for [Inkdrop](https://www.inkdrop.app/).
 Its colours are derived from the **Tailwind** palette.
 
 Read the [theme development guide](https://developers.inkdrop.app/guides/create-a-theme) for more detail.

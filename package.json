@@ -1,7 +1,7 @@
 {
   "version": "2.1.0",
-  "name": "default-light-syntax",
-  "description": "Default light syntax theme",
+  "name": "default-syntax",
+  "description": "Default syntax theme",
   "theme": "syntax",
   "scripts": {
     "prepublishOnly": "./node_modules/.bin/generate-palette"
